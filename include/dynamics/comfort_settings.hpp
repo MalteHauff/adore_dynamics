@@ -23,7 +23,7 @@ struct ComfortSettings
   double min_acceleration         = -2.0; // [m/s^2] softer than physical min (braking)
   double max_lateral_acceleration = 2.0;  // [m/s^2] cornering comfort limit
   double speed_fraction_of_limit  = 1.0;  // [0.0 - 1.0] target cruising speed as fraction of road limit
-  double headway_scale              = 1.0;  // [0.1 - 10.0] scale factor for time and distance headway
+
   double time_headway     = 3.0; // [s] time headway
   double distance_headway = 4.0; // [m] safety distance after vehicle length
 
@@ -46,9 +46,6 @@ struct ComfortSettings
     // ensure distance and time headway are positive
     time_headway     = std::max( time_headway, 0.1 );
     distance_headway = std::max( distance_headway, 0.1 );
-    headway_scale    = std::max( headway_scale, 0.1 );
   }
-  double time_headway_eff() const { return time_headway * headway_scale; }
-  double distance_headway_eff() const { return distance_headway * headway_scale; }
 };
 } // namespace adore::dynamics
